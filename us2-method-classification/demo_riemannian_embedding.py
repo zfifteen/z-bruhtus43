@@ -44,7 +44,8 @@ def embed_torus_geodesic(n, k, dims=17):
     for i in range(dims):
         frac = fractional_part(x / PHI)
         frac_pow = mp.power(frac if frac != 0 else mp.mpf(1), k)
-        new_x = PHI * frac_pow
+        # i-dependent scaling to induce variability for large n
+        new_x = PHI * frac_pow * (1 + mp.mpf('0.01') * i / dims)
         if mp.fabs(new_x - PHI) < mp.mpf('1e-10'):
             stabilization_count += 1
             if stabilization_count > 2:
@@ -82,15 +83,29 @@ def compute_simple_curvature(curve):
 
 def test_large_n():
     """Test with a large n to check for stabilization issues."""
-    large_n = mp.mpf('1234567890123456789012345678901234567890')  # 40-digit example
-    print(f"Testing large n: {large_n}")
-    k = adaptive_k(large_n)
-    print(f"Adaptive k for large n: {k}")
-    curve = embed_torus_geodesic(large_n, k, dims=5)
-    curvatures = compute_simple_curvature(curve)
-    max_curv = max(curvatures) if curvatures else 0
-    print(f"Max curvature for large n: {float(max_curv):.6f}")
-    if max_curv < 1e-6:
+    # Test 40-digit case
+    large_n_40 = mp.mpf('1234567890123456789012345678901234567890')  # 40-digit example
+    print(f"Testing 40-digit n: {large_n_40}")
+    k_40 = adaptive_k(large_n_40)
+    print(f"Adaptive k for 40-digit n: {k_40}")
+    curve_40 = embed_torus_geodesic(large_n_40, k_40, dims=5)
+    curvatures_40 = compute_simple_curvature(curve_40)
+    max_curv_40 = max(curvatures_40) if curvatures_40 else 0
+    print(f"Max curvature for 40-digit n: {float(max_curv_40):.6f}")
+    if max_curv_40 < 1e-6:
+        print("Note: Low variance—adjust perturbation amplitude for better diversity.")
+    print()
+    
+    # Test 100-digit case (crypto-level semiprime)
+    large_n_100 = mp.mpf('1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967')
+    print(f"Testing 100-digit n: {large_n_100}")
+    k_100 = adaptive_k(large_n_100)
+    print(f"Adaptive k for 100-digit n: {k_100}")
+    curve_100 = embed_torus_geodesic(large_n_100, k_100, dims=5)
+    curvatures_100 = compute_simple_curvature(curve_100)
+    max_curv_100 = max(curvatures_100) if curvatures_100 else 0
+    print(f"Max curvature for 100-digit n: {float(max_curv_100):.6f}")
+    if max_curv_100 < 1e-6:
         print("Note: Low variance—adjust perturbation amplitude for better diversity.")
     print()
 
