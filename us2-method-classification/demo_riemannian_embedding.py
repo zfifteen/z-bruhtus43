@@ -89,14 +89,14 @@ def main():
     curve = embed_torus_geodesic(n, k, dims)
     print(f"Torus geodesic embedding ({dims}D, {len(curve)} points):")
     for i, point in enumerate(curve):
-        print(f"  Point {i}: [{', '.join(f'{coord:.6f}' for coord in point)}]")
+        print(f"  Point {i}: [{', '.join(f'{float(coord):.6f}' for coord in point)}]")
     print()
 
     # Compute approximate curvatures
     curvatures = compute_simple_curvature(curve)
     print("Approximate curvatures along the geodesic:")
     for i, curv in enumerate(curvatures):
-        print(f"  Segment {i}: {curv:.6f}")
+        print(f"  Segment {i}: {float(curv):.6f}")
     print()
 
     # Demonstrate guidance for factorization
