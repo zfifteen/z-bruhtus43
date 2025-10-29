@@ -9,11 +9,12 @@ torus using iterative transformations with the golden ratio, fractional parts, a
 The embedding generates a curve of points that guide factorization by providing geometric
 candidates in higher-dimensional space, leveraging Riemannian geometry concepts.
 
-Usage: python demo_riemannian_embedding.py
+Usage: python demo_riemannian_embedding.py [--n N] [--dims DIMS] [--k K] [--window WINDOW] [--max-cands MAX_CANDS]
 """
 
 import mpmath as mp
 import math
+import argparse
 
 mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
@@ -53,7 +54,7 @@ def embed_torus_geodesic(n, k, dims=17):
         else:
             stabilization_count = 0
         x = new_x
-        perturbation = mp.mpf('1e-2') * mp.sin( (k * i + n * mp.mpf('1e-15')) % (2 * mp.pi) )
+        perturbation = mp.mpf('1e-2') * mp.sin(mp.fmod(k * i + n * mp.mpf('1e-15'), 2 * mp.pi))
         base = fractional_part(x + perturbation)
         point = []
         for j in range(dims):
@@ -82,24 +83,51 @@ def compute_simple_curvature(curve):
         curvatures.append(curvature / len(p0))
     return curvatures
 
-def attempt_factorization(n, curve, dims):
-    """Attempt simple factorization using embedding-derived candidates.
-    This is a simplified demo; real GVA uses advanced seeding and Riemannian checks."""
-    sqrt_n = math.sqrt(n)
-    candidates = set()
-    for point in curve:
-        for coord in point:
-            # Generate candidate from coordinate (scaled around sqrt(n))
-            cand = int(round(sqrt_n * (float(coord) + 1)))
-            if 1 < cand < n:
-                candidates.add(cand)
-    
-    # Test candidates
-    for p in sorted(candidates):
-        if n % p == 0:
-            q = n // p
-            if q >= p:  # Ensure p <= q
-                return [p, q]
+def attempt_factorization(n: int, curve, dims: int, window: int = 10_000, max_cands: int = 5000):
+    """
+    Map curve coords in [0,1) to integer candidates around √n and test divisibility.
+    Returns (p, q) on success; else None.
+    """
+    assert n > 3 and n % 2 == 1, "demo expects odd composite n"
+    r = math.isqrt(n)
+    seen = set()
+    tested = 0
+
+    # helper: coord ∈ [0,1) -> signed offset in [-W, +W]
+    def offset_from_coord(coord: float, j: int) -> int:
+        # center, scale, and gently spread by dimension index
+        centered = (2.0 * coord) - 1.0          # (-1, 1)
+        scale = 1.0 + (j / max(1, dims - 1)) * 0.25    # ≤ +25% spread
+        off = int(round(centered * window * scale))
+        return off
+
+    for pt in curve:
+        # Deterministic per-point candidate set
+        local = []
+        for j in range(min(dims, len(pt))):
+            c = float(pt[j])           # drop mp.mpf precisely here
+            off = offset_from_coord(c, j)
+            k1 = r + off
+            k2 = r - off
+            if 2 <= k1 <= n - 2: local.append(k1)
+            if 2 <= k2 <= n - 2: local.append(k2)
+
+        # De-duplicate while preserving order
+        for cand in local:
+            if cand in seen: 
+                continue
+            seen.add(cand)
+            tested += 1
+            # quick reject
+            if cand <= 1 or cand == n: 
+                continue
+            if n % cand == 0:
+                p = cand
+                q = n // p
+                if 1 < p < n and n == p * q:
+                    return (min(p, q), max(p, q))
+            if tested >= max_cands:
+                return None
     return None
 
 def test_large_n():
@@ -120,20 +148,26 @@ def test_large_n():
     print()
 
 def main():
-    # Example number: a small semiprime for demonstration
-    n = mp.mpf(143)  # 11 * 13
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--n", type=int, default=143)
+    ap.add_argument("--dims", type=int, default=11)
+    ap.add_argument("--k", type=float, default=0.3)
+    ap.add_argument("--window", type=int, default=10_000)
+    ap.add_argument("--max-cands", type=int, default=5000)
+    args = ap.parse_args()
+    n, dims, k = args.n, args.dims, mp.mpf(str(args.k))
+
     print(f"Embedding number: {n}")
-    print(f"Factorization (ground truth): 11 * 13 = {n}")
+    if n == 143:
+        print(f"Factorization (ground truth): 11 * 13 = {n}")
     print()
 
-    # Compute adaptive k
-    k = adaptive_k(n)
-    print(f"Adaptive k: {k}")
+    # Use fixed k from args or adaptive
+    print(f"Using k: {k}")
     print()
 
     # Embed into torus geodesic
-    dims = 5  # Use lower dims for demo
-    curve = embed_torus_geodesic(n, k, dims)
+    curve = embed_torus_geodesic(mp.mpf(n), k, dims)
     print(f"Torus geodesic embedding ({dims}D, {len(curve)} points):")
     for i, point in enumerate(curve):
         print(f"  Point {i}: [{', '.join(f'{float(coord):.6f}' for coord in point)}]")
@@ -147,11 +181,12 @@ def main():
     print()
 
     # Attempt factorization using embedding
-    factors = attempt_factorization(int(float(n)), curve, dims)
-    if factors:
-        print(f"Factorization Success: {n} = {factors[0]} × {factors[1]}")
+    res = attempt_factorization(n, curve, dims, window=args.window, max_cands=args.max_cands)
+    if res:
+        p, q = res
+        print(f"Factorization: found factors {p} × {q} == {n}")
     else:
-        print("Factorization: No factors found from embedding (expected for demo n).")
+        print("Factorization: No factors found from embedding (demo mode).")
     print()
 
     # Demonstrate guidance for factorization
