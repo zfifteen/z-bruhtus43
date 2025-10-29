@@ -69,6 +69,11 @@ This is not a constant-factor optimization of trial division but a novel subexpo
 - `description.md`: User story requirements.
 - `README.md`: This comprehensive summary.
 
+## Reproducible Runs
+
+- Default demo: `python demo_riemannian_embedding.py --n 143 --dims 11 --k 0.3`
+- Hit mode (wider search): `python demo_riemannian_embedding.py --n 143 --dims 11 --k 0.3 --window 25000 --max-cands 20000`
+
 ## Next Steps
 - Proceed to US3: Generate dataset of 128-bit semiprimes.
 - Implement GVA in Python for benchmarking.
