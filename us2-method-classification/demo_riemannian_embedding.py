@@ -41,10 +41,13 @@ def embed_torus_geodesic(n, k, dims=17):
         List of points on the geodesic curve
     """
     x = n / E_SQUARED
+    phi_n = mp.power(PHI, n)  # Pentagonal scaling factor
     curve = []
     stabilization_count = 0
     for i in range(dims):
-        frac = fractional_part(x / PHI)
+        # Apply pentagonal scaling to base x
+        scaled_x = phi_n * fractional_part(x / (E_SQUARED * phi_n))
+        frac = fractional_part(scaled_x / PHI)
         frac_pow = mp.power(frac if frac != 0 else mp.mpf(1), k)
         new_x = PHI * frac_pow * (1 + mp.mpf('0.01') * i / dims)
         if mp.fabs(new_x - PHI) < mp.mpf('1e-10'):
@@ -82,6 +85,16 @@ def compute_simple_curvature(curve):
             curvature += abs(d2 - d1)  # Simple difference
         curvatures.append(curvature / len(p0))
     return curvatures
+
+def riemannian_dist(p1, p2, n):
+    """Approximate Riemannian distance using kappa(n) and simplified terms."""
+    kappa = mp.mpf(len(mp.factor(n))) * mp.log(n + 1) / E_SQUARED  # Approximate κ(n)
+    dist = 0
+    for i in range(1, 3):  # Simplified to 2D for demo
+        d_i = abs(p1 - p2)  # Placeholder differences
+        term = d_i * mp.power(PHI, -i / 2) * (1 + kappa * d_i)
+        dist += term ** 2
+    return mp.sqrt(dist)
 
 def attempt_factorization(n: int, curve, dims: int, window: int = 10_000, max_cands: int = 5000):
     """
