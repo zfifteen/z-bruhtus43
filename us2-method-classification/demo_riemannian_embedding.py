@@ -18,15 +18,15 @@ mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
 E_SQUARED = mp.e ** 2
 
-def fractional_part(x):
+def fractional_part(x: mp.mpf) -> mp.mpf:
     # works for mp.mpf
     return x - mp.floor(x)
 
-def adaptive_k(n, w=1):
+def adaptive_k(n: mp.mpf, w: mp.mpf = mp.mpf("1")) -> mp.mpf:
     # log base-2 via mp.log(x, 2)
     return mp.mpf('0.3') / mp.log(mp.log(n + 1, 2), 2) * w
 
-def embed_torus_geodesic(n, k, dims=17):
+def embed_torus_geodesic(n: mp.mpf, k: mp.mpf, dims: int = 17) -> list:
     """
     Embed number n into a torus geodesic curve.
 
@@ -38,6 +38,7 @@ def embed_torus_geodesic(n, k, dims=17):
     Returns:
         List of points on the geodesic curve
     """
+    # Initialize x = n / e^2 for scaling
     x = n / E_SQUARED
     curve = []
     stabilization_count = 0
@@ -61,7 +62,7 @@ def embed_torus_geodesic(n, k, dims=17):
         curve.append(point)
     return curve
 
-def compute_simple_curvature(curve):
+def compute_simple_curvature(curve: list) -> list:
     """
     Compute a simple approximation of curvature along the curve.
     This is a basic demonstration; actual GVA uses full Riemannian curvature tensors.
@@ -80,7 +81,7 @@ def compute_simple_curvature(curve):
         curvatures.append(curvature / len(p0))
     return curvatures
 
-def test_large_n():
+def test_large_n() -> None:
     """Test with a large n to check for stabilization issues.
     Uses RSA-100 semiprime: 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967
     Factors: 37975227936943673922808872755445627854565536638199 x 40094690950920881030683735292761468389214899724061
@@ -97,7 +98,7 @@ def test_large_n():
         print("Note: Low variance—adjust perturbation amplitude for better diversity.")
     print()
 
-def main():
+def main() -> None:
     # Example number: a small semiprime for demonstration
     n = mp.mpf(143)  # 11 * 13
     print(f"Embedding number: {n}")
