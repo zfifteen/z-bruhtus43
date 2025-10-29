@@ -19,3 +19,4 @@ Our factorization method is classified as a **new/augmented algorithm with subex
 ## Conclusion
 
 This method warrants further investigation for larger bit sizes and comparison to SOTA like NFS.
+
