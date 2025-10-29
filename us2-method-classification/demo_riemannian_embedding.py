@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 #!/usr/bin/env python3
 """
 Demo: Riemannian Geometry Embedding for Factorization Guidance
@@ -11,7 +9,7 @@ torus using iterative transformations with the golden ratio, fractional parts, a
 The embedding generates a curve of points that guide factorization by providing geometric
 candidates in higher-dimensional space, leveraging Riemannian geometry concepts.
 
-Usage: python us2-method-classification/demo_riemannian_embedding.py
+Usage: python demo_riemannian_embedding.py
 """
 
 import mpmath as mp
@@ -20,15 +18,15 @@ mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
 E_SQUARED = mp.e ** 2
 
-def fractional_part(x: mp.mpf) -> mp.mpf:
+def fractional_part(x):
     # works for mp.mpf
     return x - mp.floor(x)
 
-def adaptive_k(n: mp.mpf, w: mp.mpf = mp.mpf("1")) -> mp.mpf:
+def adaptive_k(n, w=1):
     # log base-2 via mp.log(x, 2)
     return mp.mpf('0.3') / mp.log(mp.log(n + 1, 2), 2) * w
 
-def embed_torus_geodesic(n: mp.mpf, k: mp.mpf, dims: int = 17) -> list:
+def embed_torus_geodesic(n, k, dims=17):
     """
     Embed number n into a torus geodesic curve.
 
@@ -40,14 +38,13 @@ def embed_torus_geodesic(n: mp.mpf, k: mp.mpf, dims: int = 17) -> list:
     Returns:
         List of points on the geodesic curve
     """
-    # Initialize x = n / e^2 for scaling
     x = n / E_SQUARED
     curve = []
     stabilization_count = 0
     for i in range(dims):
         frac = fractional_part(x / PHI)
         frac_pow = mp.power(frac if frac != 0 else mp.mpf(1), k)
-        new_x = PHI * frac_pow
+        new_x = PHI * frac_pow * (1 + mp.mpf('0.01') * i / dims)
         if mp.fabs(new_x - PHI) < mp.mpf('1e-10'):
             stabilization_count += 1
             if stabilization_count > 2:
@@ -64,10 +61,11 @@ def embed_torus_geodesic(n: mp.mpf, k: mp.mpf, dims: int = 17) -> list:
         curve.append(point)
     return curve
 
-def compute_simple_curvature(curve: list) -> list:
+def compute_simple_curvature(curve):
     """
     Compute a simple approximation of curvature along the curve.
     This is a basic demonstration; actual GVA uses full Riemannian curvature tensors.
+    UNVERIFIED: Behavior for large n may stabilize, reducing curve diversity.
     """
     curvatures = []
     for i in range(1, len(curve) - 1):
@@ -83,7 +81,7 @@ def compute_simple_curvature(curve: list) -> list:
         curvatures.append(curvature / len(p0))
     return curvatures
 
-def test_large_n() -> None:
+def test_large_n():
     """Test with a large n to check for stabilization issues.
     Uses RSA-100 semiprime: 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967
     Factors: 37975227936943673922808872755445627854565536638199 x 40094690950920881030683735292761468389214899724061
@@ -100,11 +98,11 @@ def test_large_n() -> None:
         print("Note: Low variance—adjust perturbation amplitude for better diversity.")
     print()
 
-def main() -> None:
+def main():
     # Example number: a small semiprime for demonstration
-    n = mp.mpf('271628755242544365861866007260721971360')  # Random 128-bit composite
+    n = mp.mpf(143)  # 11 * 13
     print(f"Embedding number: {n}")
-    print(f"# Note: Large n for scaling demonstration")
+    print(f"Factorization (ground truth): 11 * 13 = {n}")
     print()
 
     # Compute adaptive k
@@ -136,7 +134,6 @@ def main() -> None:
     print("- High curvature points may correspond to factorization breakthroughs.")
 
     # Test large n
-
     test_large_n()
 
 if __name__ == "__main__":
