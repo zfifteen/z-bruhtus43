@@ -24,7 +24,7 @@ Heavy jargon in issues reduces accessibility, making it harder for others to und
 
 ---
 
-# User Story: Classify Factorization Method as Constant Factor or Subexponential
+## User Story: Classify Factorization Method as Constant Factor or Subexponential
 
 ## Desired Measurable Outcome
 
@@ -50,7 +50,7 @@ Clear classification helps evaluate the method's novelty and interest; constant 
 
 ---
 
-# User Story: Generate Benchmark Dataset of 128-Bit Semiprimes
+## User Story: Generate Benchmark Dataset of 128-Bit Semiprimes
 
 ## Desired Measurable Outcome
 
@@ -76,7 +76,7 @@ Standardized datasets ensure fair benchmarking; starting at 128 bits allows quic
 
 ---
 
-# User Story: Run Benchmarks on Own Factorization Method for 128-Bit Semiprimes
+## User Story: Run Benchmarks on Own Factorization Method for 128-Bit Semiprimes
 
 ## Desired Measurable Outcome
 
@@ -102,7 +102,7 @@ Solid benchmarks on standardized semiprimes validate performance claims; this is
 
 ---
 
-# User Story: Set Up and Run ECM Benchmarks for 128-Bit Semiprimes
+## User Story: Set Up and Run ECM Benchmarks for 128-Bit Semiprimes
 
 ## Desired Measurable Outcome
 
@@ -128,7 +128,7 @@ Comparison to state-of-the-art like ECM is required for novelty claims; fair con
 
 ---
 
-# User Story: Set Up and Run Cado-NFS Benchmarks for 128-Bit Semiprimes
+## User Story: Set Up and Run Cado-NFS Benchmarks for 128-Bit Semiprimes
 
 ## Desired Measurable Outcome
 
@@ -154,7 +154,7 @@ State-of-the-art comparison to Cado-NFS validates any time savings; this establi
 
 ---
 
-# User Story: Compare Benchmarks Across Methods for 128-Bit Semiprimes
+## User Story: Compare Benchmarks Across Methods for 128-Bit Semiprimes
 
 ## Desired Measurable Outcome
 
@@ -180,7 +180,7 @@ Direct comparison against SOTA determines if there's a legitimate time save wort
 
 ---
 
-# User Story: Assess and Report Probabilistic Metrics if Applicable
+## User Story: Assess and Report Probabilistic Metrics if Applicable
 
 ## Desired Measurable Outcome
 
