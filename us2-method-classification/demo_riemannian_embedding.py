@@ -40,11 +40,19 @@ def embed_torus_geodesic(n, k, dims=17):
     """
     x = n / E_SQUARED
     curve = []
+    stabilization_count = 0
     for i in range(dims):
         frac = fractional_part(x / PHI)
         frac_pow = mp.power(frac if frac != 0 else mp.mpf(1), k)
-        x = PHI * frac_pow
-        perturbation = mp.mpf('1e-2') * mp.sin(k * i + n * mp.mpf('1e-15'))
+        new_x = PHI * frac_pow
+        if mp.fabs(new_x - PHI) < mp.mpf('1e-10'):
+            stabilization_count += 1
+            if stabilization_count > 2:
+                print(f"Warning: Iteration stabilizing to PHI at i={i}, curve diversity reduced.")
+        else:
+            stabilization_count = 0
+        x = new_x
+        perturbation = mp.mpf('1e-2') * mp.sin( (k * i + n * mp.mpf('1e-15')) % (2 * mp.pi) )
         base = fractional_part(x + perturbation)
         point = []
         for j in range(dims):
@@ -71,6 +79,20 @@ def compute_simple_curvature(curve):
             curvature += abs(d2 - d1)  # Simple difference
         curvatures.append(curvature / len(p0))
     return curvatures
+
+def test_large_n():
+    """Test with a large n to check for stabilization issues."""
+    large_n = mp.mpf('1234567890123456789012345678901234567890')  # 40-digit example
+    print(f"Testing large n: {large_n}")
+    k = adaptive_k(large_n)
+    print(f"Adaptive k for large n: {k}")
+    curve = embed_torus_geodesic(large_n, k, dims=5)
+    curvatures = compute_simple_curvature(curve)
+    max_curv = max(curvatures) if curvatures else 0
+    print(f"Max curvature for large n: {float(max_curv):.6f}")
+    if max_curv < 1e-6:
+        print("Note: Low variance—adjust perturbation amplitude for better diversity.")
+    print()
 
 def main():
     # Example number: a small semiprime for demonstration
@@ -106,6 +128,10 @@ def main():
     print("- Curvatures indicate 'interesting' regions for prime candidates.")
     print("- In GVA, these guide Monte Carlo sampling for factor finding.")
     print("- High curvature points may correspond to factorization breakthroughs.")
+
+    # Test large n
+
+    test_large_n()
 
 if __name__ == "__main__":
     main()
