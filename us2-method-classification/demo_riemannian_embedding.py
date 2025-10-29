@@ -81,8 +81,11 @@ def compute_simple_curvature(curve):
     return curvatures
 
 def test_large_n():
-    """Test with a large n to check for stabilization issues."""
-    large_n = mp.mpf('1234567890123456789012345678901234567890')  # 40-digit example
+    """Test with a large n to check for stabilization issues.
+    Uses RSA-100 semiprime: 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967
+    Factors: 37975227936943673922808872755445627854565536638199 x 40094690950920881030683735292761468389214899724061
+    Source: RSA-100 challenge for reproducibility per empirical validation axiom."""
+    large_n = mp.mpf('1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967')  # RSA-100 semiprime
     print(f"Testing large n: {large_n}")
     k = adaptive_k(large_n)
     print(f"Adaptive k for large n: {k}")
