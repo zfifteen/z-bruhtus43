@@ -102,9 +102,9 @@ def test_large_n() -> None:
 
 def main() -> None:
     # Example number: a small semiprime for demonstration
-    n = mp.mpf(143)  # 11 * 13
+    n = mp.mpf('271628755242544365861866007260721971360')  # Random 128-bit composite
     print(f"Embedding number: {n}")
-    print(f"Factorization (ground truth): 11 * 13 = {n}")
+    print(f"# Note: Large n for scaling demonstration")
     print()
 
     # Compute adaptive k
