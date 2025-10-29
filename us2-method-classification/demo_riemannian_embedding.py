@@ -9,36 +9,30 @@ torus using iterative transformations with the golden ratio, fractional parts, a
 The embedding generates a curve of points that guide factorization by providing geometric
 candidates in higher-dimensional space, leveraging Riemannian geometry concepts.
 
-Usage: python demo_riemannian_embedding_fixed.py
+Usage: python us2-method-classification/demo_riemannian_embedding.py
 """
 
-import math
-import mpmath
-from decimal import Decimal, getcontext
+import mpmath as mp
 
-# Set high precision
-getcontext().prec = 100
-mpmath.mp.dps = 100
-
-PHI = Decimal((1 + math.sqrt(5)) / 2)
-E_SQUARED = Decimal(math.exp(2))
+mp.mp.dps = 100
+PHI = (mp.sqrt(5) + 1) / 2
+E_SQUARED = mp.e ** 2
 
 def fractional_part(x):
-    """Compute fractional part of a Decimal."""
-    return x - Decimal(int(x))
+    # works for mp.mpf
+    return x - mp.floor(x)
 
-def adaptive_k(n, w=1.0):
-    """Adaptive k for scaling based on log log n."""
-    log_log_n = math.log2(math.log2(float(n) + 1))
-    return Decimal(0.3 / log_log_n) * Decimal(w)
+def adaptive_k(n, w=1):
+    # log base-2 via mp.log(x, 2)
+    return mp.mpf('0.3') / mp.log(mp.log(n + 1, 2), 2) * w
 
 def embed_torus_geodesic(n, k, dims=17):
     """
     Embed number n into a torus geodesic curve.
 
     Args:
-        n: Number to embed (Decimal)
-        k: Adaptive scaling factor (Decimal)
+        n: Number to embed (mp.mpf)
+        k: Adaptive scaling factor (mp.mpf)
         dims: Dimensionality of the torus
 
     Returns:
@@ -48,17 +42,13 @@ def embed_torus_geodesic(n, k, dims=17):
     curve = []
     for i in range(dims):
         frac = fractional_part(x / PHI)
-        # Handle 0^0 case
-        if frac == 0:
-            frac_pow = Decimal(1)
-        else:
-            frac_pow = frac ** int(k)
+        frac_pow = mp.power(frac if frac != 0 else mp.mpf(1), k)
         x = PHI * frac_pow
-        perturbation = Decimal(0.01) * Decimal(math.sin(float(k) * i + float(n) * 1e-15))
-        base = fractional_part(x) + perturbation
+        perturbation = mp.mpf('1e-2') * mp.sin(k * i + n * mp.mpf('1e-15'))
+        base = fractional_part(x + perturbation)
         point = []
         for j in range(dims):
-            coord = fractional_part(base + Decimal(j * 0.1))
+            coord = fractional_part(base + j * mp.mpf('0.1'))
             point.append(coord)
         curve.append(point)
     return curve
@@ -76,15 +66,15 @@ def compute_simple_curvature(curve):
         # Approximate curvature using discrete second derivative
         curvature = 0
         for d in range(len(p0)):
-            d1 = float(p1[d] - p0[d])
-            d2 = float(p2[d] - p1[d])
+            d1 = p1[d] - p0[d]
+            d2 = p2[d] - p1[d]
             curvature += abs(d2 - d1)  # Simple difference
         curvatures.append(curvature / len(p0))
     return curvatures
 
 def main():
     # Example number: a small semiprime for demonstration
-    n = Decimal(143)  # 11 * 13
+    n = mp.mpf(143)  # 11 * 13
     print(f"Embedding number: {n}")
     print(f"Factorization (ground truth): 11 * 13 = {n}")
     print()
@@ -111,6 +101,7 @@ def main():
 
     # Demonstrate guidance for factorization
     print("Factorization Guidance:")
+    print("- This is a didactic geodesic/curvature sketch, not a proof of subexponential behavior.")
     print("- The embedded curve represents n in geometric space.")
     print("- Curvatures indicate 'interesting' regions for prime candidates.")
     print("- In GVA, these guide Monte Carlo sampling for factor finding.")
