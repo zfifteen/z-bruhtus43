@@ -13,6 +13,7 @@ Usage: python demo_riemannian_embedding.py
 """
 
 import mpmath as mp
+import math
 
 mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
@@ -81,6 +82,26 @@ def compute_simple_curvature(curve):
         curvatures.append(curvature / len(p0))
     return curvatures
 
+def attempt_factorization(n, curve, dims):
+    """Attempt simple factorization using embedding-derived candidates.
+    This is a simplified demo; real GVA uses advanced seeding and Riemannian checks."""
+    sqrt_n = math.sqrt(n)
+    candidates = set()
+    for point in curve:
+        for coord in point:
+            # Generate candidate from coordinate (scaled around sqrt(n))
+            cand = int(round(sqrt_n * (float(coord) + 1)))
+            if 1 < cand < n:
+                candidates.add(cand)
+    
+    # Test candidates
+    for p in sorted(candidates):
+        if n % p == 0:
+            q = n // p
+            if q >= p:  # Ensure p <= q
+                return [p, q]
+    return None
+
 def test_large_n():
     """Test with a large n to check for stabilization issues.
     Uses RSA-100 semiprime: 1522605027922533360535618378132637429718068114961380688657908494580122963258952897654003790690177217898916856898458221269681967
@@ -123,6 +144,14 @@ def main():
     print("Approximate curvatures along the geodesic:")
     for i, curv in enumerate(curvatures):
         print(f"  Segment {i}: {float(curv):.6f}")
+    print()
+
+    # Attempt factorization using embedding
+    factors = attempt_factorization(int(float(n)), curve, dims)
+    if factors:
+        print(f"Factorization Success: {n} = {factors[0]} × {factors[1]}")
+    else:
+        print("Factorization: No factors found from embedding (expected for demo n).")
     print()
 
     # Demonstrate guidance for factorization
