@@ -61,7 +61,7 @@ This demonstrates the practical efficiency of variance reduction techniques at m
 - Barycentric coordinate system for factor space navigation
 
 **Enhanced Distance Metrics**:
-- Epstein zeta constant (≈3.7246) for ℤ[i] lattice guidance
+- Epstein zeta constant (≈3.7246) for ℤ[i] lattice guidance: This constant from the Gaussian integer lattice theory optimizes parameter selection in Pollard's Rho by weighting candidate factors according to their lattice density, reducing the search space
 - 32× variance reduction compared to uniform sampling
 - Adaptive parameter adjustment based on intermediate results
 

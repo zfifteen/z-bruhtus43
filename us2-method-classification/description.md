@@ -28,7 +28,7 @@ Supports extensions to 256-bit semiprimes per z-sandbox updates, correlating wit
 
 ### GVA Success Rates by Bit Size
 
-Empirical validation using θ(n) = iterative frac(n/e² * φ^k) with κ = 4 ln(N+1)/e² for A*/offset search:
+Empirical validation using θ(n) = iterative frac(n/e² * φ^k) with κ = 4 ln(N+1)/e² for A*/offset search, where θ(n) represents the angular embedding coordinate, κ is the curvature scaling parameter, and A* denotes the optimal search path through the geodesic manifold:
 
 - **50-bit semiprimes**: 100% success rate
 - **64-bit semiprimes**: 12% success rate

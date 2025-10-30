@@ -111,7 +111,9 @@ def test_large_n():
 
 def test_30bit():
     """Test with 30-bit semiprime N = 1077739877 (32771 × 32887)."""
-    n_30bit = mp.mpf(1077739877)
+    # 30-bit semiprime: 1077739877 = 32771 × 32887
+    N_30BIT = 1077739877
+    n_30bit = mp.mpf(N_30BIT)
     print(f"Testing 30-bit n: {n_30bit}")
     print(f"Factorization (ground truth): 32771 × 32887")
     k_30 = adaptive_k(n_30bit)
