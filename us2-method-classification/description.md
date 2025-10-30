@@ -77,7 +77,7 @@ Z5D framework achieves **+25.91% prime density enhancement** through geodesic-in
 ### Empirical Benchmarks
 
 Validation against established methods for 128-bit+ semiprimes:
-- **ECM (Elliptic Curve Method)**: Subexponential L[1/2, √2] complexity
+- **ECM (Elliptic Curve Method)**: Subexponential L[1/2, √2] complexity (where L[α, c] denotes exp((c + o(1))(ln N)^α(ln ln N)^(1-α)))
 - **Cado-NFS (Number Field Sieve)**: Subexponential L[1/3, (64/9)^(1/3)] complexity  
 - **GVA (Geodesic Validation Assault)**: Novel geometric approach with 5% success on 128-bit (measured), >0% on 256-bit (measured)
 
