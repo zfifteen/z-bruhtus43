@@ -18,16 +18,25 @@ import os
 import time
 import random
 
-# Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+# Add parent directory to path for src module access
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from variance_reduced_rho import (
-    pollard_rho_batch,
-    SobolSequence,
-    GaussianLatticeGuide
-)
-
-from variance_reduced_dlp import dlp_batch_parallel
+try:
+    from src.variance_reduced_rho import (
+        pollard_rho_batch,
+        SobolSequence,
+        GaussianLatticeGuide
+    )
+    from src.variance_reduced_dlp import dlp_batch_parallel
+except ImportError:
+    # Fallback for running from demos directory
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+    from variance_reduced_rho import (
+        pollard_rho_batch,
+        SobolSequence,
+        GaussianLatticeGuide
+    )
+    from variance_reduced_dlp import dlp_batch_parallel
 
 
 def demo_sobol_sequences():
@@ -222,7 +231,12 @@ def demo_scaling_to_larger_semiprimes():
     print("="*70)
     print("\nHow success rate decreases with bit size (expected from O(√p)).\n")
     
-    from sympy import randprime
+    try:
+        from sympy import randprime
+    except ImportError:
+        print("Warning: sympy not available, skipping scaling demo")
+        print("Install with: pip install sympy")
+        return
     
     bit_sizes = [32, 40, 48]
     

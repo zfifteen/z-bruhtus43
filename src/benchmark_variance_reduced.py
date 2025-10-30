@@ -15,13 +15,30 @@ import time
 import random
 import json
 from typing import List, Dict, Any
-from variance_reduced_rho import pollard_rho_variance_reduced, pollard_rho_batch
-from variance_reduced_dlp import pollard_rho_dlp_variance_reduced
+
+try:
+    from variance_reduced_rho import pollard_rho_variance_reduced, pollard_rho_batch
+    from variance_reduced_dlp import pollard_rho_dlp_variance_reduced
+except ImportError:
+    # Running as script from src directory
+    import sys
+    import os
+    sys.path.insert(0, os.path.dirname(__file__))
+    from variance_reduced_rho import pollard_rho_variance_reduced, pollard_rho_batch
+    from variance_reduced_dlp import pollard_rho_dlp_variance_reduced
+
+try:
+    from sympy import randprime
+    SYMPY_AVAILABLE = True
+except ImportError:
+    SYMPY_AVAILABLE = False
+    print("Warning: sympy not available. Install with: pip install sympy")
 
 
 def generate_test_semiprime(bits: int) -> tuple:
     """Generate a random semiprime of given bit length."""
-    from sympy import randprime
+    if not SYMPY_AVAILABLE:
+        raise ImportError("sympy is required for prime generation")
     
     # Generate two random primes of bits/2 length each
     half_bits = bits // 2

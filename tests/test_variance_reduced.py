@@ -14,25 +14,45 @@ import unittest
 import sys
 import os
 
-# Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+# Add parent directory to path for src module access
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from variance_reduced_rho import (
-    SobolSequence, 
-    GaussianLatticeGuide,
-    pollard_rho_variance_reduced,
-    pollard_rho_batch,
-    gcd
-)
-
-from variance_reduced_dlp import (
-    pollard_rho_dlp_variance_reduced,
-    dlp_batch_parallel,
-    is_distinguished,
-    partition_function,
-    mod_inverse,
-    WalkState
-)
+try:
+    from src.variance_reduced_rho import (
+        SobolSequence, 
+        GaussianLatticeGuide,
+        pollard_rho_variance_reduced,
+        pollard_rho_batch,
+        gcd
+    )
+    
+    from src.variance_reduced_dlp import (
+        pollard_rho_dlp_variance_reduced,
+        dlp_batch_parallel,
+        is_distinguished,
+        partition_function,
+        mod_inverse,
+        WalkState
+    )
+except ImportError:
+    # Fallback for running from tests directory
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+    from variance_reduced_rho import (
+        SobolSequence, 
+        GaussianLatticeGuide,
+        pollard_rho_variance_reduced,
+        pollard_rho_batch,
+        gcd
+    )
+    
+    from variance_reduced_dlp import (
+        pollard_rho_dlp_variance_reduced,
+        dlp_batch_parallel,
+        is_distinguished,
+        partition_function,
+        mod_inverse,
+        WalkState
+    )
 
 
 class TestSobolSequence(unittest.TestCase):
