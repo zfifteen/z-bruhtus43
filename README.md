@@ -18,8 +18,7 @@ This repository now includes a complete implementation of **variance-reduced Pol
 
 **Important**: These techniques maintain O(√p) / O(√n) complexity and do NOT break cryptography. They improve variance and reproducibility, not asymptotic cost.
 
-**Reference Repository:** [zfifteen/z-sandbox](https://github.com/zfifteen/z-sandbox)  
-**Local Path (for reference):** /Users/velocityworks/IdeaProjects/z-sandbox
+**Reference Repository:** [zfifteen/z-sandbox](https://github.com/zfifteen/z-sandbox)
 
 ## Project Goals
 

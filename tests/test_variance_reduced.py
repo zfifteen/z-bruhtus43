@@ -27,7 +27,6 @@ try:
     )
     
     from src.variance_reduced_dlp import (
-        pollard_rho_dlp_variance_reduced,
         dlp_batch_parallel,
         is_distinguished,
         partition_function,
@@ -46,7 +45,6 @@ except ImportError:
     )
     
     from variance_reduced_dlp import (
-        pollard_rho_dlp_variance_reduced,
         dlp_batch_parallel,
         is_distinguished,
         partition_function,

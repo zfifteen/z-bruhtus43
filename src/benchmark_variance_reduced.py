@@ -14,17 +14,17 @@ It targets the goals from the issue:
 import time
 import random
 import json
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 try:
-    from variance_reduced_rho import pollard_rho_variance_reduced, pollard_rho_batch
+    from variance_reduced_rho import pollard_rho_variance_reduced
     from variance_reduced_dlp import pollard_rho_dlp_variance_reduced
 except ImportError:
     # Running as script from src directory
     import sys
     import os
     sys.path.insert(0, os.path.dirname(__file__))
-    from variance_reduced_rho import pollard_rho_variance_reduced, pollard_rho_batch
+    from variance_reduced_rho import pollard_rho_variance_reduced
     from variance_reduced_dlp import pollard_rho_dlp_variance_reduced
 
 try:

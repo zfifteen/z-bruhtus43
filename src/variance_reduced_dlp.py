@@ -18,11 +18,8 @@ improves probability of collision within fixed budget, not asymptotic cost.
 This does NOT break modern ECC or cryptographic protocols.
 """
 
-import math
-import random
-from typing import Optional, Tuple, List, Callable
+from typing import Optional, Tuple, List
 from dataclasses import dataclass
-import mpmath as mp
 
 # Import Sobol sequence from factorization module
 import sys

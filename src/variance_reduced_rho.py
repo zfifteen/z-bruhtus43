@@ -20,7 +20,7 @@ It maintains O(√p) complexity but reduces variance for better reproducibility.
 
 import math
 import random
-from typing import Tuple, Optional, Callable
+from typing import Tuple, Optional
 import mpmath as mp
 
 mp.mp.dps = 50  # High precision for large integers
@@ -125,10 +125,18 @@ class GaussianLatticeGuide:
         self.k = self._compute_adaptive_k()
     
     def _compute_adaptive_k(self) -> mp.mpf:
-        """Compute adaptive k parameter based on n."""
+        """
+        Compute adaptive k parameter based on n.
+        
+        For very small n (n <= 1), or when log(log(n+1, 2), 2) <= 0, 
+        the adaptive formula is not meaningful, so a default value is returned.
+        For practical use, n should be a semiprime of at least 2 digits (n >= 10).
+        The minimum recommended value of n for meaningful variance reduction is n >= 10.
+        """
         if self.n <= 1:
             return mp.mpf('0.5')
         log_log_n = mp.log(mp.log(self.n_mp + 1, 2), 2)
+        # For very small n, log_log_n can be <= 0; return default in that case.
         if log_log_n <= 0:
             return mp.mpf('0.5')
         return mp.mpf('0.3') / log_log_n
@@ -219,8 +227,6 @@ def pollard_rho_variance_reduced(
         return None
     if n % 2 == 0:
         return 2
-    if n == 1:
-        return None
     
     # Initialize variance reduction components
     sobol = SobolSequence(dimension=2, seed=seed)
