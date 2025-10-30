@@ -192,7 +192,6 @@ From empirical benchmarks:
 - DLP in 256-bit groups: still computationally infeasible
 
 **What it does**: Improves reliability and reproducibility of Pollard's Rho within fixed budgets, valuable for research, benchmarking, and educational purposes.
-
 ## Contributing
 
 Contributions welcome! Focus on empirical tests, adhering to axioms like Z = n(Δ_n / Δ_max) for discrete domains and geometric resolutions.

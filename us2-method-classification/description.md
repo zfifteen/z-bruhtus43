@@ -56,7 +56,6 @@ The 5D geodesic properties are extended for prime prediction, incorporating:
 ### Scaling to Large Semiprimes
 
 **Proposed extensions** for 192+ bit semiprimes (not yet validated):
-
 - **Parallel QMC-biased Rho**: Deploy 100-1000 instances with low-discrepancy sampling
 - **Barycentric coordinates**: Improve geometric representation for factor space navigation
 - **Epstein zeta-enhanced distances**: Leverage ℤ[i] lattice constant (≈3.7246) for 32× variance reduction (measured at smaller scales)
@@ -65,7 +64,6 @@ The 5D geodesic properties are extended for prime prediction, incorporating:
 ### Validation Requirements
 
 To validate subexponential claims and novelty:
-
 - Run empirical benchmarks against ECM and Cado-NFS for 128-bit+ semiprimes
 - Ensure reproducibility with mpmath/numpy/sympy (precision <1e-16)
 - Compare probabilistic success rates against baseline cutoff methods
