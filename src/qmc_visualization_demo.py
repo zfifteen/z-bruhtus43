@@ -85,14 +85,15 @@ def compute_discrepancy(points: np.ndarray, n_bins: int = 10) -> float:
     return normalized_discrepancy
 
 
-def compute_minimum_distance(points: np.ndarray) -> float:
+def compute_minimum_distance(points: np.ndarray, seed: int = 42) -> float:
     """Compute minimum distance between any two points."""
     n_points = len(points)
     min_dist = float('inf')
     
     # Sample-based approximation for efficiency
     sample_size = min(100, n_points)
-    sample_indices = np.random.choice(n_points, sample_size, replace=False)
+    rng = np.random.default_rng(seed)
+    sample_indices = rng.choice(n_points, sample_size, replace=False)
     
     for i in sample_indices:
         for j in range(n_points):

@@ -436,10 +436,14 @@ These primitives could provide:
 
 **Important Limitations:**
 
-1. **No Sub-Exponential Breakthrough**: The method remains fundamentally O(√p) in expectation
-2. **No General RSA Inversion**: Cannot efficiently factor general RSA-2048 or similar keys
-3. **No Polynomial-Time Factorization**: Not a solution to the factoring problem
-4. **No Cryptographic Break**: Does not threaten properly-sized modern cryptosystems
+These represent current limitations of the demonstrated results, though they remain active areas of ongoing research:
+
+1. **No Sub-Exponential Breakthrough Yet**: The method remains fundamentally O(√p) in expectation
+2. **No General RSA Inversion Yet**: Cannot efficiently factor general RSA-2048 or similar keys
+3. **No Polynomial-Time Factorization Yet**: Not a solution to the factoring problem
+4. **No Cryptographic Break Yet**: Does not threaten properly-sized modern cryptosystems
+
+**Note:** While these claims are not being made at this time, they represent the focus of continuous research efforts to explore the boundaries and potential of these variance reduction and geometric biasing techniques.
 
 ### Honest Assessment of Novelty
 

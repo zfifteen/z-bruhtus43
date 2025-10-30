@@ -12,7 +12,6 @@ reduction while maintaining competitive mean performance.
 Usage: python src/qmc_pollard_comparison.py
 """
 
-import math
 import time
 from typing import Tuple, List
 import numpy as np
@@ -23,6 +22,9 @@ try:
 except ImportError:
     HAS_SCIPY = False
     print("Warning: scipy not available. Using fallback Halton implementation.")
+
+# Constants
+MAX_ITERATIONS_FAILURE = 10000  # Iteration count indicating failure to factor
 
 
 def gcd(a: int, b: int) -> int:
@@ -157,7 +159,7 @@ def pollard_rho_monte_carlo(n: int, trials: int = 100, seed: int = 42) -> List[i
     
     # If we don't have enough successes, pad with remaining attempts
     if len(iteration_counts) == 0:
-        iteration_counts = [10000]  # Failed all attempts
+        iteration_counts = [MAX_ITERATIONS_FAILURE]  # Failed all attempts
     
     return iteration_counts
 
@@ -199,7 +201,7 @@ def pollard_rho_qmc(n: int, trials: int = 100) -> List[int]:
     
     # If we don't have enough successes, pad with remaining attempts
     if len(iteration_counts) == 0:
-        iteration_counts = [10000]  # Failed all attempts
+        iteration_counts = [MAX_ITERATIONS_FAILURE]  # Failed all attempts
     
     return iteration_counts
 
@@ -278,10 +280,10 @@ def run_comparison_experiment(n: int, trials: int = 100):
     print(f"{'─'*70}")
     
     # Compute improvements
-    mean_improvement = (mc_stats['mean'] - qmc_stats['mean']) / mc_stats['mean'] * 100
-    std_improvement = (mc_stats['std'] - qmc_stats['std']) / mc_stats['std'] * 100
-    var_improvement = (mc_stats['variance'] - qmc_stats['variance']) / mc_stats['variance'] * 100
-    range_improvement = (mc_stats['range'] - qmc_stats['range']) / mc_stats['range'] * 100
+    mean_improvement = ((mc_stats['mean'] - qmc_stats['mean']) / mc_stats['mean'] * 100) if mc_stats['mean'] != 0 else float('nan')
+    std_improvement = ((mc_stats['std'] - qmc_stats['std']) / mc_stats['std'] * 100) if mc_stats['std'] != 0 else float('nan')
+    var_improvement = ((mc_stats['variance'] - qmc_stats['variance']) / mc_stats['variance'] * 100) if mc_stats['variance'] != 0 else float('nan')
+    range_improvement = ((mc_stats['range'] - qmc_stats['range']) / mc_stats['range'] * 100) if mc_stats['range'] != 0 else float('nan')
     
     print(f"\n{'Improvements (QMC over Monte Carlo)':}")
     print(f"{'─'*70}")
