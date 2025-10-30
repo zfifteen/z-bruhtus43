@@ -140,13 +140,11 @@ def demonstrate_qmc_phi_hybrid():
     print(f"Example: Using φ = {float(PHI):.10f} for low-discrepancy point generation")
     print(f"Adaptive k = {float(k):.6f}")
     
-    # Generate QMC-φ sequence points
-    qmc_points = []
+    # Generate and display QMC-φ sequence points
     for i in range(5):
         # Golden ratio recurrence for low-discrepancy
         alpha = fractional_part(i * PHI)
         beta = fractional_part(i * PHI * PHI)
-        qmc_points.append((float(alpha), float(beta)))
         print(f"  QMC point {i}: ({float(alpha):.6f}, {float(beta):.6f})")
     print()
 

@@ -28,14 +28,15 @@ Supports extensions to 256-bit semiprimes per z-sandbox updates, correlating wit
 
 ### GVA Success Rates by Bit Size
 
-Empirical validation using θ(n) = iterative frac(n/e² * φ^k) with κ = 4 ln(N+1)/e² for A*/offset search, where θ(n) represents the angular embedding coordinate, κ is the curvature scaling parameter, and A* denotes the optimal search path through the geodesic manifold:
+Empirical validation using θ(n) = iterative frac(n/e² * φ^k) with κ = 4 ln(N+1)/e² for A*/offset search, where θ(n) represents the angular embedding coordinate, κ is the curvature scaling parameter, and A* denotes the optimal search path through the geodesic manifold.
 
-- **50-bit semiprimes**: 100% success rate
-- **64-bit semiprimes**: 12% success rate
-- **128-bit semiprimes**: 5% success rate
-- **256-bit semiprimes**: >0% success rate (breakthrough demonstrations)
+**Measured Results** (based on manifold_128bit.py and monte_carlo.py from z-sandbox):
+- **50-bit semiprimes**: 100% success rate (measured)
+- **64-bit semiprimes**: 12% success rate (measured)
+- **128-bit semiprimes**: 5% success rate (measured)
+- **256-bit semiprimes**: >0% success rate (measured, breakthrough demonstrations)
 
-These results are based on manifold_128bit.py and monte_carlo.py implementations from z-sandbox, demonstrating probabilistic factorization capabilities that scale with adaptive k-tuning (±0.01) and QMC-φ hybrid integration.
+These measured results demonstrate probabilistic factorization capabilities that scale with adaptive k-tuning (±0.01) and QMC-φ hybrid integration. Scripts available in z-sandbox repository for reproducibility.
 
 ### Connections to Z Ecosystem
 
@@ -45,17 +46,17 @@ Aligns with z-sandbox RQMC control, Gaussian lattice integration, and Epstein ze
 The 5D geodesic properties are extended for prime prediction, incorporating:
 
 - **Adaptive k-tuning**: Fine-grained adjustment (±0.01) for optimizing geodesic embeddings per semiprime characteristics
-- **QMC-φ hybrids**: Quasi-Monte Carlo integration with golden ratio sequencing achieves 3× error reduction compared to uniform sampling
-- **Gaussian lattice integration**: As demonstrated in geodesic_informed_z5d_search.ipynb, yields +25.91% prime density improvement in targeted search regions
+- **QMC-φ hybrids**: Quasi-Monte Carlo integration with golden ratio sequencing achieves 3× error reduction compared to uniform sampling (measured in geodesic_informed_z5d_search.ipynb)
+- **Gaussian lattice integration**: As demonstrated in geodesic_informed_z5d_search.ipynb, yields +25.91% prime density improvement in targeted search regions (measured)
 
 ### Scaling to Large Semiprimes
 
-Proposed extensions for 192+ bit semiprimes:
+**Proposed extensions** for 192+ bit semiprimes (not yet validated):
 
 - **Parallel QMC-biased Rho**: Deploy 100-1000 instances with low-discrepancy sampling
 - **Barycentric coordinates**: Improve geometric representation for factor space navigation
-- **Epstein zeta-enhanced distances**: Leverage ℤ[i] lattice constant (≈3.7246) for 32× variance reduction
-- **Target success rate**: 40-55% for 192-256 bit range based on extrapolation from current results
+- **Epstein zeta-enhanced distances**: Leverage ℤ[i] lattice constant (≈3.7246) for 32× variance reduction (measured at smaller scales)
+- **Target success rate**: 40-55% for 192-256 bit range (projected based on extrapolation from current results, requires validation against ECM/Cado-NFS per US2 requirements)
 
 ### Validation Requirements
 

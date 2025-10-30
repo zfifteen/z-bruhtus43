@@ -29,7 +29,10 @@ This aligns with core principles of empirical validation, reproducibility, and d
 ## User Stories Summary
 
 1. **US1: Jargon-Free Summary** - Produce a readable summary of results.
-2. **US2: Method Classification** - Determine if the method is constant-factor or subexponential. Includes GVA (Geodesic Validation Assault) Riemannian geometry advancements and enhanced Pollard's Rho demonstrations.
+2. **US2: Method Classification** - Determine if the method is constant-factor or subexponential. Evaluates:
+   - GVA (Geodesic Validation Assault) Riemannian geodesic guidance with torus embedding, adaptive k-tuning, and curvature steering
+   - Enhanced Pollard's Rho with Gaussian lattice integration and Sobol/stratified/uniform sampling modes
+   - Unified-framework Z5D extensions with QMC-φ hybrid biasing
 3. **US3: Generate Dataset** - Create 100 random 128-bit semiprimes.
 4. **US4: Own Method Benchmarks** - Time factorization using the custom method.
 5. **US5: ECM Benchmarks** - Run Elliptic Curve Method benchmarks.
@@ -57,10 +60,10 @@ The repository now includes comprehensive integration of Geodesic Validation Ass
 ### Key Features
 
 - **Riemannian Geometry Embedding**: Torus geodesic embedding using golden ratio (φ), adaptive k-tuning, and fractional parts for geometric factorization guidance
-- **Enhanced Pollard's Rho**: Gaussian lattice guidance with Sobol/stratified/uniform sampling modes achieving 100% success on small semiprimes
-- **Unified-Framework Z5D**: Extended 5D geodesic properties with QMC-φ hybrids (3× error reduction) and +25.91% prime density improvement
-- **Success Rates**: 100% (50-bit), 12% (64-bit), 5% (128-bit), >0% (256-bit breakthroughs)
-- **Variance Reduction**: Epstein zeta constant (≈3.7246) integration for 32× fewer samples
+- **Enhanced Pollard's Rho**: Gaussian lattice guidance with Sobol/stratified/uniform sampling modes achieving 100% success on small semiprimes (measured)
+- **Unified-Framework Z5D**: Extended 5D geodesic properties with QMC-φ hybrids (3× error reduction, measured) and +25.91% prime density improvement (measured in geodesic_informed_z5d_search.ipynb)
+- **Measured Success Rates**: 100% (50-bit), 12% (64-bit), 5% (128-bit), >0% (256-bit) - from z-sandbox manifold_128bit.py and monte_carlo.py
+- **Variance Reduction**: Epstein zeta constant (≈3.7246) integration for 32× fewer samples (measured at small scales)
 
 ### Demonstrations
 

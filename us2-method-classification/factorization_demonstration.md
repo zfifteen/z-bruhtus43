@@ -62,13 +62,13 @@ This demonstrates the practical efficiency of variance reduction techniques at m
 
 **Enhanced Distance Metrics**:
 - Epstein zeta constant (≈3.7246) for ℤ[i] lattice guidance: This constant from the Gaussian integer lattice theory optimizes parameter selection in Pollard's Rho by weighting candidate factors according to their lattice density, reducing the search space
-- 32× variance reduction compared to uniform sampling
+- 32× variance reduction compared to uniform sampling (measured at small scales, see demo_riemannian_embedding.py test_30bit())
 - Adaptive parameter adjustment based on intermediate results
 
-**Performance Targets**:
-- **192-bit semiprimes**: 40-55% success rate expected
-- **256-bit semiprimes**: 10-20% success rate (extrapolated)
-- Comparison baseline: ECM and Cado-NFS under equivalent time constraints
+**Performance Targets** (not yet validated):
+- **192-bit semiprimes**: 40-55% success rate (target/projected)
+- **256-bit semiprimes**: 10-20% success rate (target/extrapolated)
+- Requires validation: Compare against ECM and Cado-NFS under equivalent time constraints per US2 benchmarking requirements
 
 ### Integration with RQMC Control
 
