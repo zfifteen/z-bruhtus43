@@ -4,6 +4,8 @@
 
 This document provides a clean, publication-grade technical narrative summarizing recent advancements in Pollard's Rho factorization, Quasi-Monte Carlo (QMC) variance reduction techniques, and the Z5D geometric framework. The content preserves empirical claims, maintains a falsifiability posture, and provides logical sectioning for clear understanding. All methods discussed are grounded in reproducible experiments and mathematical rigor.
 
+The techniques described here reduce variance and yield reproducible nonzero success rates on selected 256-bit semiprimes; they do not constitute a general sub-exponential factoring method and are not claimed to break standard-strength RSA deployments.
+
 ---
 
 ## 1. Pollard's Rho and Its Variance Problem
@@ -30,6 +32,8 @@ The Monte Carlo nature of this search introduces significant variance challenges
 - **High Iteration-Count Variance**: The number of steps to factorization can vary dramatically between runs
 - **Unpredictable Latency**: For a given semiprime, factorization time may range from milliseconds to hours
 - **Need for Parallel Retries**: Standard practice involves running multiple instances with different (c, x₀) pairs simultaneously
+
+From an attacker model perspective, this variance forces wide parallel exploration across many parameter choices, increasing computational costs and making timing-based optimization difficult. Reducing variance directly improves the predictability and efficiency of factorization attempts.
 
 ### Impact of Variance
 
@@ -603,6 +607,6 @@ The framework is ready for peer review, with all code and data available for rep
 ---
 
 **Document Version:** 1.0  
-**Date:** 2025-10-30  
-**Author:** Z-Bruhtus43 Project Team  
+**Date:** 2025-10-29  
+**Author:** Z-Bruhtus43 Project Team (Lead: Dionisio A. Lopez III)  
 **Status:** Draft for Review
