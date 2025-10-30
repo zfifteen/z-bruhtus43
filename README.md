@@ -125,8 +125,6 @@ This demonstrates:
 
 See `us2-method-classification/` for detailed documentation on method classification, factorization demonstrations, and theoretical foundations.
 
-<<<<<<< HEAD
-=======
 ## Variance-Reduced Pollard's Rho: Implementation Details
 
 ### Core Modules
@@ -194,8 +192,6 @@ From empirical benchmarks:
 - DLP in 256-bit groups: still computationally infeasible
 
 **What it does**: Improves reliability and reproducibility of Pollard's Rho within fixed budgets, valuable for research, benchmarking, and educational purposes.
-
->>>>>>> origin/main
 ## Contributing
 
 Contributions welcome! Focus on empirical tests, adhering to axioms like Z = n(Δ_n / Δ_max) for discrete domains and geometric resolutions.
