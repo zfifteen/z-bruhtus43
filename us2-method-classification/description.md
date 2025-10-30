@@ -30,7 +30,7 @@ Supports extensions to 256-bit semiprimes per z-sandbox updates, correlating wit
 
 Empirical validation uses the following definitions:
 
-- **θ(n)**: The angular embedding coordinate, defined as iterative frac(n/e² * φ^k)
+- **θ(n)**: The angular embedding coordinate, defined as iterated frac(n/e² * φ^k)
 - **κ**: The curvature scaling parameter, given by κ = 4 ln(N+1)/e²
 - **A***: The optimal search path through the geodesic manifold (used for offset search)
 
