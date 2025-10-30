@@ -229,6 +229,7 @@ def test_large_n():
         print("Note: Low variance—adjust perturbation amplitude for better diversity.")
     print()
 
+<<<<<<< HEAD
 def test_variance_modes():
     """Test different variance modes from z-sandbox."""
     print("=" * 80)
@@ -303,6 +304,8 @@ def validate_gva_scaling():
     print("- 256-bit semiprimes: >0% success (40-55% with adaptive k-tuning)")
     print("- Barycentric enhancements for affine-invariant geometry (26 tests passing)")
 
+=======
+>>>>>>> origin/main
 def test_30bit():
     """Test with 30-bit semiprime N = 1077739877 (32771 × 32887)."""
     # 30-bit semiprime: 1077739877 = 32771 × 32887
@@ -381,12 +384,15 @@ def main():
     # Test large n
     test_large_n()
     
+<<<<<<< HEAD
     # Test variance modes from z-sandbox
     test_variance_modes()
     
     # Validate against z-sandbox GVA scaling
     validate_gva_scaling()
     
+=======
+>>>>>>> origin/main
     # Test 30-bit semiprime
     test_30bit()
     

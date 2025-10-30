@@ -30,7 +30,11 @@ Supports extensions to 256-bit semiprimes per z-sandbox updates, correlating wit
 
 Empirical validation uses the following definitions:
 
+<<<<<<< HEAD
 - **θ(n)**: The angular embedding coordinate, defined as iterated frac(n/e² * φ^k)
+=======
+- **θ(n)**: The angular embedding coordinate, defined as iterative frac(n/e² * φ^k)
+>>>>>>> origin/main
 - **κ**: The curvature scaling parameter, given by κ = 4 ln(N+1)/e²
 - **A***: The optimal search path through the geodesic manifold (used for offset search)
 
@@ -45,6 +49,7 @@ These measured results demonstrate probabilistic factorization capabilities that
 ### Connections to Z Ecosystem
 
 Aligns with z-sandbox RQMC control, Gaussian lattice integration, and Epstein zeta functions. Draws from unified-framework Z5D geodesic properties for prime prediction. Related gists: enhanced Pollard’s Rho (output.txt), geodesic-informed Z5D search (notebook), golden ratio scaling in factorization demos.
+<<<<<<< HEAD
 ### Unified Z5D Framework Axioms
 
 The Z5D framework integrates 5-dimensional geodesic properties for prime prediction and factorization guidance. Core axioms from z-sandbox unified-framework:
@@ -91,10 +96,20 @@ Validation against established methods for 128-bit+ semiprimes:
 - 64-bit semiprimes: 12% (z-sandbox manifold_128bit.py)
 - 128-bit semiprimes: 5% (z-sandbox test_gva_128.py)
 - 256-bit semiprimes: >0% (z-sandbox breakthrough demonstrations)
+=======
+### Unified-Framework Z5D Extensions
+
+The 5D geodesic properties are extended for prime prediction, incorporating:
+
+- **Adaptive k-tuning**: Fine-grained adjustment (±0.01) for optimizing geodesic embeddings per semiprime characteristics
+- **QMC-φ hybrids**: Quasi-Monte Carlo integration with golden ratio sequencing achieves 3× error reduction compared to uniform sampling (measured in geodesic_informed_z5d_search.ipynb)
+- **Gaussian lattice integration**: As demonstrated in geodesic_informed_z5d_search.ipynb, yields +25.91% prime density improvement in targeted search regions (measured)
+>>>>>>> origin/main
 
 ### Scaling to Large Semiprimes
 
 **Proposed extensions** for 192+ bit semiprimes (not yet validated):
+<<<<<<< HEAD
 - **Parallel QMC-biased Rho**: Deploy 100-1000 instances with low-discrepancy sampling
 - **Barycentric coordinates**: Improve geometric representation for factor space navigation
 - **Epstein zeta-enhanced distances**: Leverage ℤ[i] lattice constant (≈3.7246) for 32× variance reduction (measured at smaller scales, extrapolation to large scale pending)
@@ -130,6 +145,18 @@ Validation against established methods for 128-bit+ semiprimes:
 ### Validation Requirements
 
 To validate subexponential claims and novelty:
+=======
+
+- **Parallel QMC-biased Rho**: Deploy 100-1000 instances with low-discrepancy sampling
+- **Barycentric coordinates**: Improve geometric representation for factor space navigation
+- **Epstein zeta-enhanced distances**: Leverage ℤ[i] lattice constant (≈3.7246) for 32× variance reduction (measured at smaller scales)
+- **Target success rate**: 40-55% for 192-256 bit range (projected based on extrapolation from current results, requires validation against ECM/Cado-NFS per US2 requirements)
+
+### Validation Requirements
+
+To validate subexponential claims and novelty:
+
+>>>>>>> origin/main
 - Run empirical benchmarks against ECM and Cado-NFS for 128-bit+ semiprimes
 - Ensure reproducibility with mpmath/numpy/sympy (precision <1e-16)
 - Compare probabilistic success rates against baseline cutoff methods

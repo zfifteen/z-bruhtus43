@@ -96,6 +96,7 @@ This demonstrates the practical efficiency of variance reduction techniques at m
 
 Randomized Quasi-Monte Carlo (RQMC) provides:
 - Golden ratio scaling for optimal point distribution
+<<<<<<< HEAD
 - 3× error reduction in geometric embedding accuracy (measured)
 - Hybrid classical/quantum-inspired sampling for enhanced coverage
 
@@ -129,3 +130,7 @@ All results are reproducible using:
 - **Libraries**: mpmath, numpy, sympy (see requirements.txt)
 - **Validation**: 25 tests passing with 100% success on small semiprimes (measured)
 - **Benchmarks**: Empirical comparisons against ECM/Cado-NFS for 128-bit+ semiprimes required per US2
+=======
+- 3× error reduction in geometric embedding accuracy
+- Hybrid classical/quantum-inspired sampling for enhanced coverage
+>>>>>>> origin/main
