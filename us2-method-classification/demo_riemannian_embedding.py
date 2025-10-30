@@ -20,7 +20,6 @@ Usage: python us2-method-classification/demo_riemannian_embedding.py
 """
 
 import mpmath as mp
-import numpy as np
 
 mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
@@ -109,12 +108,12 @@ def vectorial_perturbation(k, i, n, dims, mode='uniform'):
             # Quasi-Monte Carlo with Sobol'-like low-discrepancy
             # O((log N)^s / N) discrepancy
             phi_j = PHI ** (j + 1)
-            pert = mp.mpf('1e-2') * fractional_part(phi_j * (i + 1) * k)
+            pert = mp.mpf('1e-2') * mp.sin(2 * mp.pi * fractional_part(phi_j * (i + 1) * k))
         
         elif mode == 'barycentric':
             # Barycentric coordinates for affine-invariant geometry
             # Uses Laguerre polynomial basis for variance reduction
-            x_norm = mp.mpf(i) / mp.mpf(dims)
+            x_norm = mp.mpf(i) / mp.mpf(dims) if dims > 0 else mp.mpf('0.5')
             laguerre_val = laguerre_polynomial(min(j, 5), x_norm)
             pert = mp.mpf('1e-3') * laguerre_val * mp.sin((k * i + j) % (2 * mp.pi))
         
