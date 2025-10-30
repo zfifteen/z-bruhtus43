@@ -16,7 +16,9 @@ This repository now includes a complete implementation of **variance-reduced Pol
 - **Geodesic Walk Bias**: Golden ratio-based geometric exploration
 - **Reproducible Success Rates**: Turn "got lucky once" into 5-100% success within fixed budgets
 
-**Important**: These techniques maintain O(√p) / O(√n) complexity and do NOT break cryptography. They improve variance and reproducibility, not asymptotic cost.
+**Measured Results**: Success rates of 5-100% have been measured on specific known semiprimes (30-bit to 60-bit) under fixed iteration/time budgets on commodity hardware. Higher bit sizes (128-bit, 256-bit) are projected based on scaling behavior and represent exploratory targets.
+
+**Important**: These techniques maintain O(√p) / O(√n) complexity and do NOT break cryptography. No asymptotic improvement below the √p / √n barrier is claimed or achieved. This work does not demonstrate a general break of modern RSA key sizes (e.g., RSA-2048) or standard ECC curves. The implementation improves variance and reproducibility, not asymptotic cost.
 
 **Reference Repository:** [zfifteen/z-sandbox](https://github.com/zfifteen/z-sandbox)
 

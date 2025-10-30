@@ -111,15 +111,15 @@ Check: gcd(|x_i - x_j|, N) for i ≠ j
 
 ### Empirical Results
 
-From our benchmarks:
-- 40-bit semiprimes: ~100% success rate within fixed budget
-- 50-bit semiprimes: ~90-100% success rate
-- 60-bit semiprimes: ~50-70% success rate
-- 64-bit semiprimes: ~12% success rate (as reported in prior work)
-- 128-bit semiprimes: ~5% success rate (projected from prior experiments)
-- 256-bit semiprimes: >0% success rate (exploratory, as mentioned in issue)
+From our benchmarks on specific known semiprimes under fixed iteration/time budgets on commodity hardware:
+- 40-bit semiprimes: ~100% success rate (measured on known test cases)
+- 50-bit semiprimes: ~90-100% success rate (projected from scaling)
+- 60-bit semiprimes: ~50-70% success rate (projected from scaling)
+- 64-bit semiprimes: ~12% success rate (referenced from prior work)
+- 128-bit semiprimes: ~5% success rate (exploratory target based on projections)
+- 256-bit semiprimes: >0% success rate (exploratory target, as mentioned in issue)
 
-**Key Point**: These are success rates *within a fixed iteration budget*, not claims of breaking the O(√p) barrier.
+**Key Point**: These are success rates *within a fixed iteration budget*, not claims of breaking the O(√p) barrier. Higher bit sizes (128-bit, 256-bit) are scaling projections and exploratory targets, not empirically validated at those scales in this implementation.
 
 ## Application to Discrete Logarithm Problem
 

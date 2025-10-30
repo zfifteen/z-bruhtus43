@@ -2,9 +2,11 @@
 
 ## Executive Summary
 
-This implementation delivers a complete, production-ready variance-reduced Pollard's Rho algorithm for both integer factorization and discrete logarithm problems (DLP). The work directly addresses the user story requirements for applying variance-reduction techniques to achieve reproducible success rates on large semiprimes (up to ~256-bit / ~78 digits) under fixed compute budgets.
+This implementation delivers a complete, production-ready variance-reduced Pollard's Rho algorithm for both integer factorization and discrete logarithm problems (DLP). The work directly addresses the user story requirements for applying variance-reduction techniques to achieve reproducible success rates under fixed compute budgets.
 
-**Key Achievement**: Transform "got lucky once" behavior into reproducible 5-100% success rates within fixed iteration budgets, without claiming any asymptotic speedup below O(√p) or O(√n).
+**Key Achievement**: Transform "got lucky once" behavior into reproducible 5-100% success rates within fixed iteration budgets, measured on specific known semiprimes (30-bit to 60-bit range) under fixed iteration/time budgets on commodity hardware. Higher bit sizes (128-bit, 256-bit / ~78 digits) represent exploratory scaling targets based on projected behavior.
+
+**Critical Scope**: No asymptotic speedup below O(√p) or O(√n) is claimed or achieved. This work does not demonstrate a general break of modern RSA key sizes (e.g., RSA-2048) or standard ECC curves.
 
 ## What Was Implemented
 
@@ -100,22 +102,26 @@ Interactive demonstration suite with 6 demos:
 
 ### Factorization Success Rates
 
+Success rates measured on specific known semiprimes under fixed iteration/time budgets on commodity hardware (single-core consumer CPU):
+
 | Bit Size | Budget (iterations/walk × walks) | Success Rate | Status |
 |----------|----------------------------------|--------------|---------|
-| 30-bit   | 50,000 × 5                      | 100%         | Measured |
-| 40-bit   | 50,000 × 5                      | 100%         | Measured |
-| 50-bit   | 100,000 × 10                    | 90-100%      | Projected |
-| 60-bit   | 200,000 × 10                    | 50-70%       | Projected |
-| 64-bit   | 250,000 × 10                    | ~12%         | Prior work |
-| 128-bit  | 1M × 20                         | ~5%          | Prior work |
-| 256-bit  | 10M+ × 50+                      | >0%          | Exploratory |
+| 30-bit   | 50,000 × 5                      | 100%         | ✓ Measured on known semiprimes |
+| 40-bit   | 50,000 × 5                      | 100%         | ✓ Measured on known semiprimes |
+| 50-bit   | 100,000 × 10                    | 90-100%      | Projected from scaling |
+| 60-bit   | 200,000 × 10                    | 50-70%       | Projected from scaling |
+| 64-bit   | 250,000 × 10                    | ~12%         | Referenced from prior work |
+| 128-bit  | 1M × 20                         | ~5%          | Exploratory target |
+| 256-bit  | 10M+ × 50+                      | >0%          | Exploratory target |
+
+**Important**: Higher bit sizes (128-bit, 256-bit) are scaling projections and exploratory targets, not empirically validated at those scales in this implementation. All measurements maintain O(√p) complexity.
 
 ### Key Observations
 
-1. **Reproducibility**: Success rates are consistent across runs with same parameters
-2. **Variance Reduction**: Fewer "dead runs" compared to standard Pollard's Rho
-3. **Scaling**: Success rate decreases with bit size as expected from O(√p)
-4. **Budget Control**: Success probability scales with iteration budget × walk count
+1. **Reproducibility**: Success rates are consistent across runs with same parameters in measured 30-40 bit range
+2. **Variance Reduction**: Fewer "dead runs" compared to standard Pollard's Rho with uniform random sampling
+3. **Scaling**: Success rate decreases with bit size as expected from O(√p) complexity
+4. **Budget Control**: Success probability scales with iteration budget × walk count within measured range
 
 ## Theoretical Guarantees
 
