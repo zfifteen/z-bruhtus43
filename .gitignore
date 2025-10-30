@@ -5458,3 +5458,5 @@ venv/lib/python3.12/site-packages/sympy-1.14.0.dist-info/licenses/AUTHORS
 venv/lib/python3.12/site-packages/sympy-1.14.0.dist-info/licenses/LICENSE
 venv/share/man/man1/isympy.1
 .grok/settings.json
+__pycache__/
+*.pyc
