@@ -24,8 +24,10 @@ import mpmath as mp
 mp.mp.dps = 100
 PHI = (mp.sqrt(5) + 1) / 2
 E_SQUARED = mp.e ** 2
-# Epstein zeta constant for Gaussian lattice guidance
-EPSTEIN_ZETA = mp.mpf('3.7246')  # ≈3.7246 for enhanced distances
+# Epstein zeta constant for Gaussian lattice guidance.
+# The Epstein zeta function ζ(s) for the 2D Gaussian lattice at s=2 yields ≈3.7246,
+# which is used here to enhance distance calculations in anisotropic lattice metrics.
+EPSTEIN_ZETA = mp.mpf('3.7246')
 
 def fractional_part(x):
     # works for mp.mpf
