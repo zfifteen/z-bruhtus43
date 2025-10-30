@@ -28,7 +28,11 @@ Supports extensions to 256-bit semiprimes per z-sandbox updates, correlating wit
 
 ### GVA Success Rates by Bit Size
 
-Empirical validation using θ(n) = iterative frac(n/e² * φ^k) with κ = 4 ln(N+1)/e² for A*/offset search, where θ(n) represents the angular embedding coordinate, κ is the curvature scaling parameter, and A* denotes the optimal search path through the geodesic manifold.
+Empirical validation uses the following definitions:
+
+- **θ(n)**: The angular embedding coordinate, defined as iterative frac(n/e² * φ^k)
+- **κ**: The curvature scaling parameter, given by κ = 4 ln(N+1)/e²
+- **A***: The optimal search path through the geodesic manifold (used for offset search)
 
 **Measured Results** (based on manifold_128bit.py and monte_carlo.py from z-sandbox):
 - **50-bit semiprimes**: 100% success rate (measured)
