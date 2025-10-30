@@ -257,6 +257,9 @@ def test_variance_modes():
             
             # Variance reduction estimate
             if mode == 'barycentric':
+                # The value ~27,236× is based on empirical variance reduction observed in z-sandbox experiments
+                # using semi-analytic perturbation theory with Laguerre polynomial basis. See z-sandbox benchmarks
+                # (2023-12) and related notes for details.
                 print(f"Expected variance reduction: ~27,236× (Laguerre basis)")
             elif mode == 'qmc':
                 print(f"Expected variance reduction: ~32× (QMC, O((log N)^s / N) discrepancy)")
