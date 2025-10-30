@@ -25,6 +25,9 @@ This aligns with core principles of empirical validation, reproducibility, and d
 - **PROBLEM_STATEMENT.md**: Summary of the original GitHub issue request.
 - **USER_STORIES.md**: High-level user stories guiding the project.
 - **Subfolders (e.g., us1-jargon-free-summary/)**: Each contains a `description.md` with detailed user story breakdowns.
+- **docs/pollards_rho_qmc_z5d_technical_narrative.md**: Comprehensive technical narrative on Pollard's Rho, QMC variance reduction, and Z5D framework.
+- **src/qmc_pollard_comparison.py**: Empirical comparison of QMC vs Monte Carlo for Pollard's Rho parameter selection.
+- **src/qmc_visualization_demo.py**: Visual demonstration of QMC vs Monte Carlo coverage properties.
 
 ## User Stories Summary
 
@@ -37,12 +40,40 @@ This aligns with core principles of empirical validation, reproducibility, and d
 7. **US7: Benchmark Comparison** - Analyze and compare results statistically.
 8. **US8: Probabilistic Metrics** - Assess success rates for probabilistic methods.
 
+## Key Documentation
+
+### Technical Narratives
+
+- **[Pollard's Rho QMC Z5D Technical Narrative](docs/pollards_rho_qmc_z5d_technical_narrative.md)**: Publication-grade technical summary covering:
+  - Pollard's Rho variance challenges
+  - QMC/RQMC variance reduction techniques
+  - Z5D geometric biasing framework
+  - Lattice embeddings and Epstein zeta corrections
+  - Empirical results and 256-bit achievements
+  - Scientific standing and falsifiability
+
+### Demonstrations
+
+Run these scripts to see QMC variance reduction in action:
+
+```bash
+# Visualize QMC vs Monte Carlo coverage
+python src/qmc_visualization_demo.py
+
+# Compare QMC vs Monte Carlo for Pollard's Rho
+python src/qmc_pollard_comparison.py
+
+# Demonstrate Riemannian embedding
+python us2-method-classification/demo_riemannian_embedding.py
+```
+
 ## Getting Started
 
 1. **Clone the Repo**: `git clone <repo-url>`
 2. **Review Problem Statement**: Read `PROBLEM_STATEMENT.md`.
-3. **Implement User Stories**: Start with dataset generation (US3) and proceed to benchmarks.
-4. **Dependencies**: Python with libraries like mpmath, numpy, sympy for computations; ECM and Cado-NFS for benchmarks.
+3. **Read Technical Narrative**: See `docs/pollards_rho_qmc_z5d_technical_narrative.md` for comprehensive overview.
+4. **Run Demonstrations**: Execute scripts in `src/` to see QMC techniques in action.
+5. **Dependencies**: Python with libraries like mpmath, numpy, sympy, scipy for computations; ECM and Cado-NFS for benchmarks.
 
 ## Benchmarks and Validation
 
