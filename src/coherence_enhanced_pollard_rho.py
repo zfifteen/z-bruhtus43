@@ -38,7 +38,6 @@ Author: Claude Code (implementing issue #16)
 Date: 2025-10-30
 """
 
-import math
 import numpy as np
 from typing import Optional, Tuple, List, Dict, Any
 from dataclasses import dataclass
@@ -54,7 +53,6 @@ from rqmc_control import (
 )
 from reduced_coherence import (
     ReducedCoherenceSampler,
-    CoherenceMetrics,
     CoherenceMode
 )
 
@@ -63,7 +61,6 @@ class FactorizationMode(Enum):
     """Factorization modes with different coherence strategies."""
     STANDARD = "standard"                     # Baseline Pollard's Rho
     FIXED_COHERENCE = "fixed_coherence"       # Fixed α parameter
-    ADAPTIVE_COHERENCE = "adaptive_coherence" # Dynamic α targeting 10% variance
     SPLIT_STEP = "split_step"                 # Periodic re-scrambling
     ENSEMBLE_AVERAGED = "ensemble_averaged"   # Multiple independent realizations
 
@@ -221,7 +218,6 @@ class CoherenceEnhancedPollardRho:
             # Standard Pollard's Rho walk
             x = 2
             y = 2
-            d = 1
 
             for iter_count in range(max_iterations):
                 x = self._pollard_function(x, N, c)
@@ -332,7 +328,6 @@ class CoherenceEnhancedPollardRho:
             # Pollard's Rho walk
             x = 2
             y = 2
-            d = 1
 
             for iter_count in range(max_iterations):
                 x = self._pollard_function(x, N, c)
@@ -440,7 +435,6 @@ class CoherenceEnhancedPollardRho:
                 # Pollard's Rho walk
                 x = 2
                 y = 2
-                d = 1
 
                 for iter_count in range(max_iterations // num_steps):
                     x = self._pollard_function(x, N, c)

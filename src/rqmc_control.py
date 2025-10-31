@@ -40,7 +40,6 @@ References:
 - Burley et al. (2020): Practical hash-based Owen scrambling
 """
 
-import math
 import numpy as np
 from typing import List, Tuple, Optional, Dict, Any, Callable
 from dataclasses import dataclass

@@ -25,7 +25,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from coherence_enhanced_pollard_rho import (
     factor_with_coherence,
     CoherenceEnhancedPollardRho,
-    FactorizationMode
 )
 
 

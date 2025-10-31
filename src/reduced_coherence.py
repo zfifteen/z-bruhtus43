@@ -38,7 +38,6 @@ References:
 - Photonics: Complex screen method for numerical pulse propagation
 """
 
-import math
 import numpy as np
 from typing import List, Tuple, Optional, Dict, Any
 from dataclasses import dataclass

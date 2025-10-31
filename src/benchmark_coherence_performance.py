@@ -19,8 +19,6 @@ Author: Claude Code (implementing issue #16 benchmarks)
 Date: 2025-10-30
 """
 
-import math
-import time
 import json
 import numpy as np
 from typing import List, Dict, Tuple, Any, Optional
@@ -28,16 +26,14 @@ from dataclasses import dataclass, asdict
 from collections import defaultdict
 
 try:
-    from sympy import randprime, isprime
+    from sympy import randprime
     SYMPY_AVAILABLE = True
 except ImportError:
     SYMPY_AVAILABLE = False
 
 from coherence_enhanced_pollard_rho import (
     factor_with_coherence,
-    FactorizationMode
 )
-from low_discrepancy import SobolSampler
 
 
 @dataclass
@@ -85,7 +81,7 @@ def generate_semiprime(bit_size: int, seed: Optional[int] = None) -> Tuple[int, 
     if not SYMPY_AVAILABLE:
         raise ImportError("sympy required for prime generation")
 
-    rng = np.random.Generator(np.random.PCG64(seed)) if seed else np.random.default_rng()
+#     rng = np.random.Generator(np.random.PCG64(seed)) if seed else np.random.default_rng()
 
     # Generate two primes of approximately equal size
     p_bits = bit_size // 2

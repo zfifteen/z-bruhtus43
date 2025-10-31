@@ -28,7 +28,6 @@ from coherence_enhanced_pollard_rho import (
     CoherenceEnhancedPollardRho,
     factor_with_coherence,
     FactorizationMode,
-    FactorizationResult
 )
 from rqmc_control import (
     ScrambledSobolSampler,
@@ -37,10 +36,8 @@ from rqmc_control import (
     estimate_variance_from_replications
 )
 from reduced_coherence import (
-    ReducedCoherenceSampler,
     CoherenceMode
 )
-
 
 class TestAlphaMapping:
     """Test α parameter to scrambling depth mapping."""

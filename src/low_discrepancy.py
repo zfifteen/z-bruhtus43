@@ -112,6 +112,9 @@ class GoldenAngleSampler:
         Returns:
             Array of shape (n, 2) with (x, y) coordinates
         """
+        if n <= 0:
+            raise ValueError("n must be > 0")
+
         indices = np.arange(n)
         
         # Vogel spiral: r_i = √(i/n) * radius
@@ -151,6 +154,9 @@ class GoldenAngleSampler:
         if r_min >= r_max:
             raise ValueError(f"Inner radius must be less than outer radius: r_min={r_min}, r_max={r_max}")
         
+        if n <= 0:
+            raise ValueError("n must be > 0")
+
         indices = np.arange(n)
         
         # Annulus: r_i = √(r_min² + i/n * (r_max² - r_min²))
